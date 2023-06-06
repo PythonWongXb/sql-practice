@@ -28,3 +28,7 @@ select * from sql_store.customers
 select *, quantity * unit_price as total_price from sql_store.order_items
     where order_id = '2'
     order by total_price desc;
+
+-- limit
+select * from sql_store.customers
+    order by points desc limit 6, 3;
