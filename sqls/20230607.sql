@@ -24,3 +24,10 @@ from sql_store.order_items oi
 join sql_store.order_item_notes oin
     on oin.order_id = oi.order_id
     and oin.product_id = oi.product_id;
+   
+-- outer join table left join or right join
+select p.product_id, name, quantity
+from sql_store.products p
+left join
+    sql_store.order_items oi on p.product_id = oi.product_id
+order by p.product_id
