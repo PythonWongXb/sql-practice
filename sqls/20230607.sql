@@ -11,3 +11,4 @@ select e.employee_id, e.first_name, m.first_name as manage_first_name from emplo
 
 select e.employee_id, e.first_name from employees e
     where e.reports_to is null;
+
