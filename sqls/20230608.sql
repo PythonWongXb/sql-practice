@@ -9,3 +9,8 @@ left join invoices i
     using (invoice_id)
 left join payment_methods pm
     on p.payment_method = pm.payment_method_id
+
+-- cross join
+select p.name, s.name
+from products p
+cross join shippers s
