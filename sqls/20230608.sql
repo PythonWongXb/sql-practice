@@ -14,3 +14,17 @@ left join payment_methods pm
 select p.name, s.name
 from products p
 cross join shippers s
+
+-- unions
+select customer_id, first_name, points, 'Bronze' as type
+from customers c
+where points < 2000
+union
+select customer_id, first_name, points, 'Silver' as type
+from customers c
+where points between 2000 and 3000
+union
+select customer_id, first_name, points, 'Gold' as type
+from customers c
+where points > 3000
+order by points
