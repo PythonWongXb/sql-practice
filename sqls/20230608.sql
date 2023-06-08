@@ -28,3 +28,13 @@ select customer_id, first_name, points, 'Gold' as type
 from customers c
 where points > 3000
 order by points
+
+-- mutiple row insert
+use sql_store;
+insert into shippers (name)
+    values
+        ('shipper1'),
+        ('shipper2'),
+        ('shipper3');
+
+select * from shippers;
