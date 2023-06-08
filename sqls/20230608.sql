@@ -85,4 +85,13 @@ where invoice_id = 3;
 select *
 from invoices;
 
+-- update mutiple row
+update invoices
+set payment_date = due_date, payment_total = invoice_total * 0.5
+where client_id in (3, 1);
+
+select *
+from invoices
+where client_id in (3, 1);
+
 
