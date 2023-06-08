@@ -31,3 +31,10 @@ from sql_store.products p
 left join
     sql_store.order_items oi on p.product_id = oi.product_id
 order by p.product_id
+
+-- mutiple outer join
+select c.customer_id, c.first_name, order_id, s.shipper_id, s.name
+from sql_store. customers c
+    left join sql_store.orders o on o.customer_id = c.customer_id
+    left join sql_store.shippers s on s.shipper_id = o.shipper_id;
+
