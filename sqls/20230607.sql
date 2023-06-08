@@ -38,3 +38,10 @@ from sql_store. customers c
     left join sql_store.orders o on o.customer_id = c.customer_id
     left join sql_store.shippers s on s.shipper_id = o.shipper_id;
 
+use sql_store;
+select order_date, order_id, o.shipper_id, s.name as shipper, c.first_name, os.name as status
+from orders o
+join customers c on o.customer_id = c.customer_id
+    left join shippers s on s.shipper_id = o.shipper_id
+        join order_statuses os on o.status = os.order_status_id
+
