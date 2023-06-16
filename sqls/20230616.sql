@@ -46,3 +46,31 @@ create procedure set_payment(
 call set_payment(2, 102, '2023-10-02');
 call set_payment(2, -102, '2023-10-02');
 
+
+drop function if exists get_risk_factor_for_client;
+create function get_risk_factor_for_client(
+    client_id int
+)
+returns integer
+    deterministic
+    reads sql data
+    modifies sql data
+begin
+    declare risk_factor decimal(9, 2) default 0;
+    declare invoice_total decimal(9, 2);
+    declare invoice_count int;
+
+    select count(*), sum(i.invoice_total)
+    into invoice_count, invoice_total
+    from invoices i
+    where i.client_id = client_id;
+    set risk_factor = invoice_total / invoice_count * 5;
+
+    return ifnull(risk_factor, 0);
+end;
+
+select *,
+       get_risk_factor_for_client(client_id) as risk
+from clients
+order by risk
+
