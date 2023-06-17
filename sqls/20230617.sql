@@ -35,3 +35,22 @@ end;
 #     (default, 5, 5, '2023-01-01', 10000, 1),
 #     (default, 5, 6, '2023-01-01', 10000, 1),
 #     (default, 5, 7, '2023-01-01', 10000, 1)
+
+
+show variables like 'event%';
+drop event if exists yearly_delete_payment_audits_rows;
+create event yearly_delete_payment_audits_rows
+on schedule
+    -- at '2022-01-01'
+    every 1 year starts '2023-01-01' ends '2023-10-10'
+do begin
+    delete from payments_audit
+        where action_date < subdate(now(), interval 1 year);
+end;
+
+show events
+    where Name = 'yearly_delete_payment_audits_rows'
+;
+
+alter event yearly_delete_payment_audits_rows disable;
+alter event yearly_delete_payment_audits_rows enable;
